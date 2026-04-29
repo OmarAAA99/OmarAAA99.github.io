@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arngren Autos</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f4f4; }
+    header { background-color: #252525; display: flex; align-items: center; justify-content: center; height: 80px; }
+    .logo img { height: 50px; display: block; }
+    .subheader { background-color: #888888; display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; position: relative; }
+    .search-container { position: relative; width: 300px; }
+    .search-container input { width: 100%; padding: 10px 10px 10px 40px; border: 1px solid #ccc; border-radius: 5px; }
+    .search-container img { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); height: 20px; width: 20px; pointer-events: none; }
+    .nav-links a { text-decoration: none; color: #fff; font-weight: bold; padding: 8px 12px; border-radius: 5px; margin-left: 10px; transition: background-color 0.3s ease; }
+    .nav-links a:hover { background-color: #666666; }
+    .hero { text-align: center; padding: 20px; }
+    .cars-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 220px); gap: 0; }
+    .cars-grid div { position: relative; }
+    .cars-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cars-grid div::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
+    footer { background-color: #252525; color: #fff; text-align: center; padding: 15px; }
+    footer .social-icons img { width: 32px; height: 32px; margin: 0 8px; vertical-align: middle; }
+    .suggestions { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; border-radius: 5px; max-height: 150px; overflow-y: auto; z-index: 1000; }
+    .suggestions div { padding: 8px; cursor: pointer; }
+    .suggestions div:hover { background-color: #f0f0f0; }
+
+    /*  Responsive para celular */
+    @media (max-width: 768px) {
+      header h1 { font-size: 20px; }
+      .search-container { width: 100%; }
+      .catalogo-grid {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+      }
+      .auto { width: 90%; margin-bottom: 20px; }
+      .auto img { height: auto; max-height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="arngren.png" alt="Logo Arngren">
+    </div>
+  </header>
+
+  <div class="subheader">
+    <div class="search-container">
+      <img src="lupa.png" alt="Buscar">
+      <input type="text" id="searchPrincipal" placeholder="Buscar autos...">
+      <div id="suggestionsPrincipal" class="suggestions"></div>
+    </div>
+<div class="nav-links">
+  <a href="catalogo.html">Menú</a>
+  <a href="sobre.html">Sobre nosotros</a>
+
+</div>
+
+  </div>
+
+  <section class="hero">
+    <h1>Bienvenido a Arngren Autos</h1>
+    <p>Descubre nuestra selección de vehículos eléctricos, híbridos y deportivos.</p>
+  </section>
+
+  <section class="cars-grid">
+    <div><img src="carro rojo.jpg" alt="Carro rojo"></div>
+    <div><img src="carro azul.jpg" alt="Carro azul"></div>
+    <div><img src="carro amarillo.jpg" alt="Carro amarillo"></div>
+    <div><img src="carro blanco.jpg" alt="Carro blanco"></div>
+    <div><img src="carro plateado.jpg" alt="Carro plateado"></div>
+    <div><img src="carro negro.jpg" alt="Carro negro"></div>
+  </section>
+
+  <footer>
+    <p>Tel: 0123456789 | FIME, UANL</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/share/1ALiGeerSs/" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/arngren_autos?igsh=MTlqejkwMWo3cWZvdw==" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://x.com/Arngren223489" target="_blank"><img src="x.png" alt="X"></a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("searchPrincipal");
+      const suggestionsBox = document.getElementById("suggestionsPrincipal");
+      const autosList = [
+        "Toyota Corolla 2020",
+        "Mazda 3 2021",
+        "Honda Civic 2019",
+        "Tesla Model Y (Long Range AWD)",
+        "Volvo EX30",
+        "Volkswagen ID.7 Pro",
+        "Xpeng G9",
+        "Toyota bZ4X (AWD)",
+        "BMW i4 eDrive40"
+      ];
+
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        suggestionsBox.innerHTML = "";
+
+        if (query) {
+          const filtered = autosList.filter(auto => auto.toLowerCase().includes(query));
+          filtered.forEach(auto => {
+            const div = document.createElement("div");
+            div.textContent = auto;
+            div.onclick = () => {
+              window.location.href = "catalogo.html?q=" + encodeURIComponent(auto);
+            };
+            suggestionsBox.appendChild(div);
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
+

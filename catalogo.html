@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Autos - Arngren</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    /* Encabezado con logo y título */
+    header {
+      background-color: #252525;
+      display: flex;              /* activa flexbox */
+      align-items: center;        /* alinea verticalmente logo y título */
+      justify-content: center;    /* centra el título horizontalmente */
+      padding: 40px;
+      position: relative;
+    }
+
+    header a {
+      position: absolute;         /* fija el logo a la izquierda */
+      left: 20px;
+    }
+
+    header img {
+      height: 60px;
+      display: block;
+    }
+
+    header h1 {
+      color: #fff;
+      font-size: 24px;
+      margin: 0;
+    }
+    .subheader { background-color: #888888; display: flex; justify-content: center; align-items: center; padding: 10px 30px; height: 60px; position: relative; }
+    .search-container { position: relative; width: 300px; }
+    .search-container input { width: 100%; padding: 10px 10px 10px 40px; border: 1px solid #ccc; border-radius: 5px; }
+    .search-container img { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); height: 20px; width: 20px; pointer-events: none; }
+    .suggestions { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; border-radius: 5px; max-height: 150px; overflow-y: auto; z-index: 1000; }
+    .suggestions div { padding: 8px; cursor: pointer; }
+    .suggestions div:hover { background-color: #f0f0f0; }
+    .catalogo-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 30px; }
+    .auto { background-color: #fff; border: 1px solid #ccc; border-radius: 8px; width: 250px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+    .auto img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+    .auto h3 { margin: 10px 0 5px; }
+    .auto p { margin: 5px 0; }
+    .auto button { background-color: #c00; color: #fff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
+    .auto button:hover { background-color: #a00; }
+    .detalles { display: none; margin-top: 10px; text-align: left; font-size: 14px; }
+    .detalles table { width: 100%; border-collapse: collapse; }
+    .detalles td { padding: 4px; border-bottom: 1px solid #ddd; }
+footer {
+  background-color: #252525; /* gris oscuro */
+  color: #fff;
+  text-align: center;
+  padding: 1px;             /* ajusta el alto */
+  width: 100%;               /* ocupa todo el ancho */
+  position: relative;           /* se queda fijo abajo */
+  bottom: 0;
+  left: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: #f9f9f9; /* color del cuerpo */
+}
+
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <img src="arngren.png" alt="Logo Arngren">
+  </a>
+  <h1>Catálogo de autos</h1>
+</header>
+
+
+  <div class="subheader">
+    <div class="search-container">
+      <img src="lupa.png" alt="Buscar">
+      <input type="text" id="searchCatalogo" placeholder="Buscar autos...">
+      <div id="suggestions" class="suggestions"></div>
+    </div>
+  </div>
+
+  <div class="catalogo-grid">
+    <!-- Toyota Corolla -->
+    <div class="auto"><img src="toyota 2020.jpg" alt="Toyota Corolla 2020"><h3>Toyota Corolla 2020</h3><p>Precio: $270,000.00</p><button onclick="toggleDetalles('detalles-toyota')">Ver detalles</button><div id="detalles-toyota" class="detalles"><table><tr><td><strong>Marca:</strong></td><td>Toyota</td></tr><tr><td><strong>Modelo:</strong></td><td>Corolla 2020</td></tr><tr><td><strong>Precio:</strong></td><td>$270,000.00</td></tr><tr><td><strong>Transmisión:</strong></td><td>Automática CVT</td></tr><tr><td><strong>Tipo:</strong></td><td>Sedán compacto</td></tr></table></div></div>
+
+    <!-- Mazda -->
+    <div class="auto"><img src="Mazda 3.jpg" alt="Mazda 3 2021"><h3>Mazda 3 2021</h3><p>Precio: $285,000.00</p><button onclick="toggleDetalles('detalles-mazda')">Ver detalles</button><div id="detalles-mazda" class="detalles"><table><tr><td><strong>Marca:</strong></td><td>Mazda</td></tr><tr><td><strong>Modelo:</strong></td><td>Mazda 3 Sedán 2021</td></tr><tr><td><strong>Precio:</strong></td><td>$285,000.00</td></tr><tr><td><strong>Transmisión:</strong></td><td>Automática SKYACTIV-Drive</td></tr><tr><td><strong>Tipo:</strong></td><td>Sedán mediano con diseño deportivo</td></tr></table></div></div>
+
+    <!-- Honda -->
+    <div class="auto"><img src="Honda.jpg" alt="Honda Civic 2019"><h3>Honda Civic 2019</h3><p>Precio: $270,000.00</p><button onclick="toggleDetalles('detalles-honda')">Ver detalles</button><div id="detalles-honda" class="detalles"><table><tr><td><strong>Marca:</strong></td><td>Honda</td></tr><tr><td><strong>Modelo:</strong></td><td>Civic 2019</td></tr><tr><td><strong>Precio:</strong></td><td>$270,000.00</td></tr><tr><td><strong>Transmisión:</strong></td><td>Automática CVT</td></tr><tr><td><strong>Tipo:</strong></td><td>Sedán compacto</td></tr></table></div></div>
+
+    <!-- Tesla -->
+    <div class="auto"><img src="tesla y.jpg" alt="Tesla Model Y Long Range AWD"><h3>Tesla Model Y (Long Range AWD)</h3><p>Precio: $940,000.00</p><button onclick="toggleDetalles('detalles-tesla')">Ver detalles</button><div id="detalles-tesla" class="detalles"><table><tr><td><strong>Marca:</strong></td><td>Tesla</td></tr><tr><td><strong>Modelo:</strong></td><td>Model Y (Long Range AWD)</td></tr><tr><td><strong>Precio:</strong></td><td>$940,000.00</td></tr><tr><td><strong>Transmisión:</strong></td><td>Automática (Direct Drive)</td></tr><tr><td><strong>Tipo:</strong></td><td>SUV compacto/mediano, el vehículo más vendido en Noruega.</td></tr></table></div></div>
+
+    <!-- Volvo -->
+    <div class="auto"><img src="volvo.jpg" alt="Volvo EX30"><h3>Volvo EX30</h3><p>Precio: $685,000.00</p><button onclick="toggleDetalles('detalles-volvo')">Ver detalles</button><div id="detalles-volvo" class="detalles"><table><tr><td><strong>Marca:</strong></td><td>Volvo</td></tr><tr><td><strong>Modelo:</strong></td><td>EX30</td></tr><tr><td><strong>Precio:</strong></td><td>$685,000.00</td></tr><tr><td><strong>Transmisión:</strong></td><td>Automática (Single Speed)</td></tr><tr><td><strong>Tipo:</strong></td><td>SUV compacto con diseño minimalista escandinavo.</td></tr></table></div></div>
+
+
+    <!-- Xpeng -->
+    <div class="auto">
+      <img src="xpeng.jpg" alt="Xpeng G9">
+      <h3>Xpeng G9</h3>
+      <p>Precio: $1,320,000.00</p>
+      <button onclick="toggleDetalles('detalles-xpeng')">Ver detalles</button>
+      <div id="detalles-xpeng" class="detalles">
+        <table>
+          <tr><td><strong>Marca:</strong></td><td>Xpeng</td></tr>
+          <tr><td><strong>Modelo:</strong></td><td>G9</td></tr>
+          <tr><td><strong>Precio:</strong></td><td>$1,320,000.00</td></tr>
+          <tr><td><strong>Transmisión:</strong></td><td>Automática (Single Speed)</td></tr>
+          <tr><td><strong>Tipo:</strong></td><td>SUV grande de lujo con tecnología de carga ultrarrápida.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Toyota bZ4X -->
+    <div class="auto">
+      <img src="toyotabz.jpg" alt="Toyota bZ4X AWD">
+      <h3>Toyota bZ4X (AWD)</h3>
+      <p>Precio: $890,000.00</p>
+      <button onclick="toggleDetalles('detalles-bz4x')">Ver detalles</button>
+      <div id="detalles-bz4x" class="detalles">
+        <table>
+          <tr><td><strong>Marca:</strong></td><td>Toyota</td></tr>
+          <tr><td><strong>Modelo:</strong></td><td>bZ4X (AWD)</td></tr>
+          <tr><td><strong>Precio:</strong></td><td>$890,000.00</td></tr>
+          <tr><td><strong>Transmisión:</strong></td><td>Automática (e-Axle)</td></tr>
+          <tr><td><strong>Tipo:</strong></td><td>SUV mediano enfocado en durabilidad y tracción total.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Volkswagen -->
+<div class="auto">
+  <img src="volks.jpg" alt="Volkswagen ID.7 Pro">
+  <h3>Volkswagen ID.7 Pro</h3>
+  <p>Precio: $1,150,000.00</p>
+  <button onclick="toggleDetalles('detalles-volks')">Ver detalles</button>
+  <div id="detalles-volks" class="detalles">
+    <table>
+      <tr><td><strong>Marca:</strong></td><td>Volkswagen</td></tr>
+      <tr><td><strong>Modelo:</strong></td><td>ID.7 Pro</td></tr>
+      <tr><td><strong>Precio:</strong></td><td>$1,150,000.00</td></tr>
+      <tr><td><strong>Transmisión:</strong></td><td>Automática (Single Speed)</td></tr>
+      <tr><td><strong>Tipo:</strong></td><td>Sedán premium ejecutivo de largo alcance.</td></tr>
+    </table>
+  </div>
+</div>
+
+
+  <footer>
+    <p>© 2026 Arngren</p>
+  </footer>
+
+  <script>
+    function toggleDetalles(id) {
+      const detalles = document.getElementById(id);
+      detalles.style.display = (detalles.style.display === "block") ? "none" : "block";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("searchCatalogo");
+      const suggestionsBox = document.getElementById("suggestions");
+      const autos = document.querySelectorAll(".auto");
+      const autosList = [
+        "Toyota Corolla 2020",
+        "Mazda 3 2021",
+        "Honda Civic 2019",
+        "Tesla Model Y (Long Range AWD)",
+        "Volvo EX30",
+        "Xpeng G9",
+        "Toyota bZ4X (AWD)",
+      ];
+
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        suggestionsBox.innerHTML = "";
+
+        if (query) {
+          const filtered = autosList.filter(auto => auto.toLowerCase().includes(query));
+          filtered.forEach(auto => {
+            const div = document.createElement("div");
+            div.textContent = auto;
+            div.onclick = () => {
+              searchInput.value = auto;
+              suggestionsBox.innerHTML = "";
+              filterAutos(auto.toLowerCase());
+            };
+            suggestionsBox.appendChild(div);
+          });
+        } else {
+          autos.forEach(auto => auto.style.display = "block");
+        }
+
+        filterAutos(query);
+      });
+
+      function filterAutos(query) {
+        autos.forEach(auto => {
+          const title = auto.querySelector("h3").textContent.toLowerCase();
+          if (title.includes(query) || query === "") {
+            auto.style.display = "block";
+          } else {
+            auto.style.display = "none";
+          }
+        });
+      }
+
+      // Al cargar la página, revisa si hay parámetro q en la URL
+      const params = new URLSearchParams(window.location.search);
+      const queryParam = params.get("q");
+      if (queryParam) {
+        searchInput.value = queryParam;
+        filterAutos(queryParam.toLowerCase());
+      }
+    });
+  </script>
+
+</body>
+</html>
